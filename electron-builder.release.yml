@@ -1,0 +1,14 @@
+# Release builds: the base config plus Electron fuses that remove debugging and
+# Node entry points an attacker with local access could abuse. Not used for
+# `dist:dir`, so packaged builds can still be driven by the E2E suite.
+extends: ./electron-builder.yml
+electronFuses:
+  runAsNode: false
+  enableNodeOptionsEnvironmentVariable: false
+  enableNodeCliInspectArguments: false
+  enableCookieEncryption: true
+  enableEmbeddedAsarIntegrityValidation: true
+  onlyLoadAppFromAsar: true
+  # Unsigned local builds on Apple Silicon need a fresh ad-hoc signature after
+  # the binary is modified; signed builds are re-signed by electron-builder anyway.
+  resetAdHocDarwinSignature: true

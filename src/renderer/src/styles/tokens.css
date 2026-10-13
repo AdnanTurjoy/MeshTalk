@@ -1,0 +1,83 @@
+/*
+ * Design tokens. Theme follows `prefers-color-scheme`, which Electron drives
+ * from the persisted theme setting via nativeTheme.themeSource.
+ */
+:root {
+  color-scheme: light dark;
+
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Ubuntu Mono', Menlo, Consolas, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-md: 0.875rem;
+  --text-lg: 1rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.75rem;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --sidebar-width: 232px;
+  --duration: 140ms;
+
+  /* Light */
+  --bg: #f7f8fa;
+  --bg-sidebar: #eef0f3;
+  --surface: #ffffff;
+  --surface-hover: #f2f4f7;
+  --border: #dde1e7;
+  --text: #16191d;
+  --text-muted: #5b6370;
+  --accent: #2357d9;
+  --accent-hover: #1c48b8;
+  --accent-text: #ffffff;
+  --accent-soft: #e6edfc;
+  --success: #17803d;
+  --success-soft: #e3f4e8;
+  --warning: #9a5b00;
+  --warning-soft: #fdf0d9;
+  --danger: #c4231b;
+  --danger-soft: #fbe6e5;
+  --focus-ring: 0 0 0 3px rgb(35 87 217 / 0.35);
+  --shadow-md: 0 4px 16px rgb(16 24 40 / 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161a;
+    --bg-sidebar: #1a1d22;
+    --surface: #1f2228;
+    --surface-hover: #272b32;
+    --border: #2f343c;
+    --text: #e8eaee;
+    --text-muted: #9aa3b0;
+    --accent: #6b97ff;
+    --accent-hover: #86aaff;
+    --accent-text: #0c1426;
+    --accent-soft: #1d2a47;
+    --success: #4ec27a;
+    --success-soft: #16301f;
+    --warning: #e8a948;
+    --warning-soft: #33270f;
+    --danger: #ff7b72;
+    --danger-soft: #3a1a18;
+    --focus-ring: 0 0 0 3px rgb(107 151 255 / 0.45);
+    --shadow-md: 0 4px 20px rgb(0 0 0 / 0.45);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration: 0ms;
+  }
+}

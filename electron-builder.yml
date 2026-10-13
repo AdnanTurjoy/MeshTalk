@@ -1,0 +1,54 @@
+appId: org.meshtalk.desktop
+productName: MeshTalk
+copyright: Copyright © MeshTalk contributors
+directories:
+  output: dist
+  buildResources: build
+files:
+  - out/**
+  - package.json
+  # better-sqlite3 loads its bundled N-API prebuild; sources and local builds aren't needed.
+  - '!node_modules/better-sqlite3/{deps,src,build,binding.gyp}{,/**}'
+# Native SQLite bindings cannot be loaded from inside the asar archive.
+asarUnpack:
+  - '**/*.node'
+# better-sqlite3 ships N-API (ABI-stable) prebuilds for every target platform,
+# so nothing is recompiled. This is what makes building Windows/Linux
+# installers on a Mac possible.
+npmRebuild: false
+
+mac:
+  target:
+    - target: dmg
+      arch: [arm64, x64]
+  category: public.app-category.social-networking
+  hardenedRuntime: true
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  extendInfo:
+    NSCameraUsageDescription: MeshTalk uses the camera only during video calls you start or accept.
+    NSMicrophoneUsageDescription: MeshTalk uses the microphone only during calls and voice messages you start.
+    NSLocalNetworkUsageDescription: MeshTalk finds and connects to other MeshTalk devices on your local network.
+    NSBonjourServices:
+      - _meshtalk._tcp
+# Notarization runs when APPLE_ID / APPLE_APP_SPECIFIC_PASSWORD / APPLE_TEAM_ID are set (docs/release.md).
+
+win:
+  target:
+    - target: nsis
+      arch: [x64, arm64]
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  deleteAppDataOnUninstall: false
+
+linux:
+  target:
+    - target: AppImage
+      arch: [x64, arm64]
+    - target: deb
+      arch: [x64, arm64]
+  category: Network
+  maintainer: MeshTalk contributors <maintainers@meshtalk.invalid>
+  synopsis: LAN-first private messaging, file sharing and calls
